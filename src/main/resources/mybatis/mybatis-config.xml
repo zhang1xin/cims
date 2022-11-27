@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+
+    <!-- 读取数据库连接配置 读取classpath下的配置文件 -->
+    <properties resource="mybatis/jdbc.properties" />
+
+    <!-- mybatis的可选编程配置 -->
+    <settings>
+        <!-- 是否启用二级缓存 -->
+        <setting name="cacheEnabled" value="true"/>
+        <!--设置启用数据库字段下划线映射到java对象的驼峰式命名属性，默认为false-->
+        <setting name="mapUnderscoreToCamelCase" value="true"/>
+        <!-- 指定默认的执行器 -->
+        <setting name="defaultExecutorType" value="SIMPLE"/>
+        <!-- 输出mybatis执行的SQL语句 -->
+        <setting value="STDOUT_LOGGING" name="logImpl"/>
+    </settings>
+
+    <!-- 对象别名 -->
+    <typeAliases>
+        <typeAlias type="com.oioi77.cims.user.entity.User" alias="User"/>
+        <typeAlias type="com.oioi77.cims.person.entity.Person" alias="Person"/>
+<!--        <typeAlias type="com.oioi77.cims.person.entity.Subsidy" alias="Subsidy"/>-->
+    </typeAliases>
+
+
+    <!-- 对事务的管理和连接池的配置 -->
+    <environments default="development">
+        <environment id="development">
+            <transactionManager type="JDBC"/>
+            <dataSource type="POOLED">
+                <property name="driver" value="${jdbc.driver}"/>
+                <property name="url" value="${jdbc.url}"/>
+                <property name="username" value="${jdbc.username}"/>
+                <property name="password" value="${jdbc.password}"/>
+            </dataSource>
+        </environment>
+    </environments>
+
+    <!-- 装载mybatis映射文件 -->
+    <mappers>
+        <mapper resource="mybatis/mapper/UserMapper.xml"/>
+        <mapper resource="mybatis/mapper/PersonMapper.xml"/>
+        <mapper resource="mybatis/mapper/SubsidyMapper.xml"/>
+    </mappers>
+
+</configuration>
